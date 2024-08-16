@@ -1,5 +1,5 @@
 {% set name = "paket" %}
-{% set version = "8.0.0" %}
+{% set version = "8.0.3" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/fsprojects/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: e40fabb15f47d40c9bac69c95aa05679ec2f0d62f236906aa25a51963418d4f7
+  sha256: 4aaba4eb16dfe1b89eda43162ec10a399b47a00e3b6dfbcd904eb47d232bc05b
 
 build:
   noarch: generic
