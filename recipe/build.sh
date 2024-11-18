@@ -47,4 +47,9 @@ call %DOTNET_ROOT%\dotnet %CONDA_PREFIX%\libexec\paket\paket.dll %*
 EOF
 
 # Download dependency licenses with dotnet-project-licenses
-dotnet-project-licenses --input src/Paket/Paket.fsproj -t -d license-files
+tee ignored_packages.json << EOF
+["Mono.Cecil"]
+EOF
+
+# Download dependency licenses with dotnet-project-licenses
+dotnet-project-licenses --input src/Paket/Paket.fsproj -t -d license-files -ignore ignored_packages.json
