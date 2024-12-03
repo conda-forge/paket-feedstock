@@ -42,7 +42,7 @@ tee ${PREFIX}/bin/paket << EOF
 #!/bin/sh
 exec \${DOTNET_ROOT}/dotnet exec \${CONDA_PREFIX}/libexec/paket/paket.dll "\$@"
 EOF
-chmod +x ${PREFIX}/bin
+chmod +x ${PREFIX}/bin/paket
 
 tee ${PREFIX}/bin/paket.cmd << EOF
 call %DOTNET_ROOT%\dotnet %CONDA_PREFIX%\libexec\paket\paket.dll %*
