@@ -4,6 +4,7 @@ set -o xtrace -o nounset -o pipefail -o errexit
 
 mkdir -p ${PREFIX}/bin
 mkdir -p ${PREFIX}/libexec/${PKG_NAME}
+ln -sf ${DOTNET_ROOT}/dotnet ${PREFIX}/bin
 
 # Delete vendored bootstrap paket so it is reinstalled
 rm -rf global.json
@@ -41,6 +42,7 @@ tee ${PREFIX}/bin/paket << EOF
 #!/bin/sh
 exec \${DOTNET_ROOT}/dotnet exec \${CONDA_PREFIX}/libexec/paket/paket.dll "\$@"
 EOF
+chmod +x ${PREFIX}/bin
 
 tee ${PREFIX}/bin/paket.cmd << EOF
 call %DOTNET_ROOT%\dotnet %CONDA_PREFIX%\libexec\paket\paket.dll %*
