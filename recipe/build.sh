@@ -55,3 +55,5 @@ EOF
 
 # Download dependency licenses with dotnet-project-licenses
 dotnet-project-licenses --input src/Paket/Paket.fsproj -t -d license-files -ignore ignored_packages.json
+
+rm ${PREFIX}/bin/dotnet
