@@ -8,24 +8,7 @@ ln -sf ${DOTNET_ROOT}/dotnet ${PREFIX}/bin
 
 # Delete vendored bootstrap paket so it is reinstalled
 rm -rf global.json
-rm .paket/paket.exe
 framework_version="$(dotnet --version | sed -e 's/\..*//g').0"
-
-# Allow bootstrap paket to use newer .NET
-tee ${SRC_DIR}/.paket/paket.runtimeconfig.json << EOF
-{
-  "runtimeOptions": {
-    "tfm": "net${framework_version}",
-    "framework": {
-      "name": "Microsoft.NETCore.App",
-      "version": "${framework_version}.0"
-    }
-  }
-}
-EOF
-
-# Allow paket to use dotnet on Linux instead of Mono
-sed -i 's/$(MonoPath) --runtime=.* "$(PaketExePath)"/"$(PaketExePath)"/' .paket/Paket.Restore.targets
 
 # Overwrite hardcoded .NET version
 sed -i "s?<TargetFrameworks>.*</TargetFrameworks>?<TargetFrameworks>net${framework_version}</TargetFrameworks>?" \
@@ -34,7 +17,7 @@ sed -i "s?<TargetFrameworks>.*</TargetFrameworks>?<TargetFrameworks>net${framewo
 # Build package with dotnet publish
 dotnet tool restore
 dotnet tool update paket
-dotnet publish --no-self-contained src/Paket/Paket.fsproj --output ${PREFIX}/libexec/${PKG_NAME} --framework net${framework_version}
+dotnet publish --no-self-contained src/Paket/Paket.fsproj --output ${PREFIX}/libexec/${PKG_NAME} --framework net${framework_version} -p:TreatWarningsAsErrors=false
 rm -rf ${PREFIX}/libexec/${PKG_NAME}/${PKG_NAME}
 
 # Add bash and batch wrappers
