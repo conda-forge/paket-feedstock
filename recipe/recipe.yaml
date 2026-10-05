@@ -1,5 +1,5 @@
 context:
-  version: "10.3.1"
+  version: "11.0.0"
 
 package:
   name: paket
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/fsprojects/paket/archive/${{ version }}.tar.gz
-  sha256: c101645bcda61fc3cc6f40be0ff57eda79908738a3ee4f29706a8c08288667de
+  sha256: 8891f71fd7a53258b7d014f63d2851a2c77efff4415d256bb8c954949b2647e9
 
 build:
   number: 0
